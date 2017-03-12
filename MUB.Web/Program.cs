@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Web
+namespace MUB.Web
 {
     public class Program
     {
@@ -16,10 +16,14 @@ namespace Web
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
-                .UseApplicationInsights()
-                .Build();
+                .UseApplicationInsights();
 
-            host.Run();
+
+
+            host.CaptureStartupErrors(true);
+            host.UseSetting("detailedErrors", "true");
+
+            host.Build().Run();
         }
     }
 }
